@@ -1,0 +1,2 @@
+WARNING:root:2019-05-06 17:13:56.214048 [901] Can't send messages for users without permission
+WARNING:root:2019-05-23 18:53:39.528796 [5] User authorization failed: method is unavailable with group auth.
