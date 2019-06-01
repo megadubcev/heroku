@@ -1,1 +1,1 @@
-web: python vk.py
+bot: python vk.py
