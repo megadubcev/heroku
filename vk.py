@@ -5,14 +5,17 @@ import json
 import logging
 import datetime
 import requests
+from flask import Flask
 
-logging.basicConfig(filename='example.log')
+# logging.basicConfig(filename='example.log')
 
 from math2 import primer, uravnenie, uravnenie2
 
 from geo import continent, capital, flagi, sqare
 
-vk = vk_api.VkApi(token="424d63642ffd83aabe9fc26a0efd897e056f7dcef61c9f82bde477fcbcd358bc2fadd339f3dd169dcc51e")
+vk = vk_api.VkApi(token="ee7810d9e0444f4d3c87eccce84de8e1a37ebb585c02314c99f66e42d8fa3f1035453925d7c42eff6f2aa")
+
+app = Flask(__name__)
 
 
 class DB:
@@ -197,8 +200,11 @@ db = DB()
 userDB = UsersModel(db.get_connection())
 userDB.init_table()
 
-while True:
-    try:
+
+@app.route('/')
+def main():
+    while True:
+        # try:
         messages = vk.method("messages.getConversations", {"offset": 0, "count": 20, "filter": "unread"})
         if messages["count"] >= 1:
             id = messages["items"][0]["last_message"]["from_id"]
@@ -566,7 +572,11 @@ while True:
                 vk.method("messages.send",
                           {"peer_id": id, "random_id": random.randint(-100000000, 100000000),
                            "message": "Что-то пошло не так"})
+    return "привет"
 
-    except Exception as e:
-        log_to_file(str(datetime.datetime.now()), str(e))
-        print(e)
+    # except Exception as e:
+    #   log_to_file(str(datetime.datetime.now()), str(e))
+    #   print(e)
+
+if __name__ == '__main__':
+    app.run(port=8888, host='127.0.0.1')
