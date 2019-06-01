@@ -241,7 +241,7 @@ while True:
                     vk.method("messages.send",
                               {"peer_id": id, "random_id": random.randint(-100000000, 100000000),
                                "message": "выбери предмет",
-                               "keyboard": get_keyboard([['математика', 'география', 'меню']])})
+                               "keyboard": get_keyboard([['математика', 'география'], ['меню']])})
                     userDB.context(id, "выбор предмета")
 
 
@@ -275,7 +275,7 @@ while True:
                     vk.method("messages.send",
                               {"peer_id": id, "random_id": random.randint(-100000000, 100000000),
                                "message": "я тебя не понял",
-                               "keyboard": get_keyboard([['математика', 'география' 'меню']])})
+                               "keyboard": get_keyboard([['математика', 'география'], ['меню']])})
 
 
             elif userDB.get(id)[3] == "выбор сложности математика":
